@@ -9,11 +9,11 @@
 	--font-color: #777;
 	--section-padding: 60px;
 	--section-padding-sm: 30px;
-	--section-bg-color: #ececec;
+	--section-bg-color: #edededdb;
 	--transition: all 0.3s ease-in-out;
 }
 html {
-	scroll-behavior: smooth;
+	scroll-behavior: "eager";
 }
 * {
 	box-sizing: border-box;
@@ -55,14 +55,90 @@ body {
 
 /* ###################################################################### */
 
+/* Start Settings Box  */
+.settings-box {
+	position: fixed;
+	left: -200px;
+	top: 50%;
+	transform: translateY(-50%);
+	width: 200px;
+	min-height: 70vh;
+	background: rgba(255, 255, 255, 0.2); /* transparency */
+	backdrop-filter: blur(15px); /* blur behind */
+	-webkit-backdrop-filter: blur(15px); /* Safari support */
+	border-radius: 20px;
+	border: 1px solid rgba(255, 255, 255, 0.3);
+	z-index: 1000;
+	transition: left 0.3s ease-in-out;
+}
+.settings-box.open {
+	left: 0;
+}
+.settings-box .settings-box__toggle {
+	position: absolute;
+	right: -38px;
+	top: 100px;
+	background: rgba(255, 255, 255, 0.35); /* transparency */
+	backdrop-filter: blur(15px); /* blur behind */
+	-webkit-backdrop-filter: blur(15px); /* Safari support */
+	border: 1px solid rgba(255, 255, 255, 0.3);
+	width: 30px;
+	height: 30px;
+	text-align: center;
+	cursor: pointer;
+	padding: 18px;
+}
+.settings-box .settings-box__toggle i {
+	color: var(--third-color);
+	font-size: 22px;
+	transform: translate(-14px, -10px);
+}
+.settings-box .settings-container {
+	padding: 10px;
+	background-color: rgba(220, 213, 220, 0.309);
+	margin: 15px;
+	border-radius: 10px;
+}
+.settings-box .settings-container h4 {
+	color: white;
+	margin-bottom: 10px;
+}
+.settings-box .settings-container .colors-list {
+	display: flex;
+	justify-content: center;
+	text-align: center;
+	gap: 15px;
+}
+.settings-box .settings-container .colors-list li {
+	width: 25px;
+	height: 25px;
+	cursor: pointer;
+	border-radius: 50%;
+}
+.settings-box .settings-container .colors-list li.active {
+	border: 3px solid white;
+	width: 30px;
+	height: 30px;
+	transform: translateY(-10px);
+}
+.random-backgrounds i {
+	font-size: 25px;
+	display: block;
+	margin: 0 auto;
+}
+/* End Settings Box  */
+
+/* ###################################################################### */
+
 /* Start Landing Page  */
 
 .landing-page {
-	background-image: url(../IMAGES/landing-1.jpg);
+	background-image: url(../IMAGES/landing-1.avif);
 	background-size: cover;
 	min-height: 100vh;
 	position: relative;
-	transition: background 4s linear;
+	padding: 20px 0px;
+	transition: background 2s linear;
 }
 .landing-page .layout {
 	position: absolute;
@@ -163,7 +239,7 @@ body {
 }
 .landing-page .landing-page__header__nav ul li:hover > a,
 .landing-page .landing-page__header__nav ul li.active > a {
-	color: var(--third-color);
+	/* color: var(--third-color); */
 	font-size: 20px;
 	padding: 15px;
 	border-radius: 50px;
@@ -189,8 +265,7 @@ body {
 	z-index: 2;
 }
 .landing-page .landing-page__content__title h1 {
-	color: var(--third-color);
-	font-size: 35px;
+	color: white;
 	margin-bottom: 20px;
 	line-height: 1;
 }
@@ -200,5 +275,67 @@ body {
 }
 .landing-page .landing-page__content__title h1 span:last-child {
 	color: var(--main-color);
-	font-size: 30px;
+}
+
+/* end landing page */
+
+/* ############################################################################ */
+
+/* start about section */
+.about {
+	padding: var(--section-padding);
+	background: linear-gradient(to right, var(--main-color), var(--sec-color));
+}
+.about .about__content {
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	padding-bottom: 40px;
+}
+.about .about__content .about__content__text {
+	flex-basis: 50%;
+}
+.about .about__content .about__content__text h2 {
+	color: var(--third-color);
+	margin-bottom: 20px;
+	font-size: 40px;
+}
+.about .about__content .about__content__text p {
+	line-height: 1.5;
+	color: white;
+	font-size: 24px;
+	font-weight: bold;
+	padding-left: 20px;
+}
+.about .about__content .about__content__text p span {
+	color: var(--third-color);
+}
+.about .about__content .about__content__image {
+	width: auto-fit;
+	margin: 0 auto;
+}
+
+.about .about__content:first-child .about__content__image img {
+	width: 199px;
+	border-radius: 36%;
+	height: 204px;
+}
+.about .about__content:last-child .about__content__image img {
+	width: 287px;
+	border-radius: 46%;
+	height: 245px;
+}
+/* end about section */
+
+/* start animation */
+.fa-spin {
+	animation: fa-spin 2s infinite linear;
+}
+@keyframes fa-spin {
+	0% {
+		transform: rotate(0deg);
+	}
+	100% {
+		transform: rotate(360deg);
+	}
 }

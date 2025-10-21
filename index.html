@@ -6,8 +6,13 @@
 		<meta charset="UTF-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 		<title>BarcelonaFC</title>
-		<link rel="stylesheet" href="../CSS/master.css" />
-		<link rel="stylesheet" href="../CSS/Normalize.css" />
+		<!-- mani CSS file -->
+		<link rel="stylesheet" href="/CSS/master.css" />
+		<!-- Render All Elements Normally -->
+		<link rel="stylesheet" href="/CSS/Normalize.css" />
+		<!-- Font Awesome Library -->
+		<link rel="stylesheet" href="/CSS/all.min.css" />
+		<!-- Google Fonts -->
 		<link rel="preconnect" href="https://fonts.googleapis.com" />
 		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
 		<link
@@ -15,7 +20,30 @@
 			href="https://fonts.googleapis.com/css2?family=Cairo:wght@200..1000&family=Open+Sans:ital,wght@0,300..800;1,300..800&family=Work+Sans:ital,wght@0,100..900;1,100..900&display=swap" />
 	</head>
 	<body>
-		<div class="landing-page" id="Home" style="padding: 20px 0">
+		<!-- start settings box -->
+		<div class="settings-box">
+			<div class="settings-box__toggle">
+				<i class="fa-solid fa-gear"></i>
+			</div>
+			<div class="settings-container">
+				<h4 style="padding: 8px 0; font-size: 21px">Colors</h4>
+				<ul class="colors-list">
+					<li data-color="#0576e7"></li>
+					<li data-color="#df364c"></li>
+					<li data-color="#fcce16"></li>
+					<li data-color="#fff"></li>
+				</ul>
+			</div>
+			<div class="settings-container">
+				<h4 style="padding: 8px 0; font-size: 20px">Random Bg</h4>
+				<div class="random-backgrounds">
+					<i class="fa-solid fa-pause" style="cursor: pointer"></i>
+				</div>
+			</div>
+		</div>
+		<!-- end settings box -->
+		<!-- start landing page -->
+		<div class="landing-page" id="Home" loading="eager">
 			<div class="layout"></div>
 			<div class="landing-page__header">
 				<div class="landing-page__header__logo">
@@ -24,7 +52,8 @@
 				<div class="landing-page__header__nav">
 					<ul>
 						<li class="active"><a href="#Home">Home</a></li>
-						<li><a href="#About" id="About">Culés</a></li>
+						<li><a href="#About" id="About">About</a></li>
+						<li><a href="#Culés" id="Culés">Culés</a></li>
 						<li><a href="#Gallery.html" id="Gallery">Gallery</a></li>
 						<li><a href="#contact" id="Contact">Contact</a></li>
 					</ul>
@@ -35,12 +64,48 @@
 					<h1 style="text-transform: uppercase">
 						Barcelona Football Club
 						<br />
-						<span>visca el barca</span> <br />
-						<span>visca catalunya</span>
+						visca el<span> barca</span> & visca<span> catalunya</span>
 					</h1>
 				</div>
 			</div>
 		</div>
+		<!-- end landing page -->
+
+		<!-- Start About section -->
+		<div class="about" id="About">
+			<div class="container">
+				<div class="about__content">
+					<div class="about__content__text">
+						<h2>About Barcelona FC</h2>
+						<h3 class="about__tagline">More than a Club, Home of Football.</h3>
+						<p>
+							UEFA Champions League (<span>5th</span> time) <br />
+							Copa del Rey (<span>32nd</span> time) <br />
+							La Liga (<span>28th</span> time)<br />
+							Supercopa de España (<span>15th</span> time)
+						</p>
+					</div>
+					<div class="about__content__image">
+						<img src="/IMAGES/LOGO.jpg" alt="logo" />
+					</div>
+				</div>
+				<div class="about__content">
+					<div class="about__content__image">
+						<img src="/IMAGES/Spotify Camp Nou.jpeg" alt="logo" />
+					</div>
+					<div class="about__content__text">
+						<h2>🏟️ Spotify Camp Nou</h2>
+						<p>
+							Location : Barcelona, Catalonia, Spain <br />
+							Open in : 1957 <br />
+							Capacity : (after renovation): ~105,000 <br />
+							Owned by : FC Barcelona
+						</p>
+					</div>
+				</div>
+			</div>
+		</div>
+		<!-- End About section -->
 		<script src="../JS/master.js"></script>
 	</body>
 </html>
