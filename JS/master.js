@@ -142,3 +142,116 @@ function changeBG() {
 		landingIMG.style.backgroundImage = `url(${BGS[0]})`;
 	}
 }
+
+// proogress bars animation
+const progressSpans = document.querySelectorAll(
+	".skills .skills__prog .skills__prog__bar .skills__prog__bar__item .skills__prog__bar__item__progress span"
+);
+window.addEventListener("scroll", () => {
+	let skillsOffsetTop = document.querySelector(".skills").offsetTop; // distance from top of page to top of skills section
+	let skillsOuterHeight = document.querySelector(".skills").offsetHeight; // including padding and border
+	let skillsInnerHeight = this.innerHeight; // height of viewport
+	let windowScrollTop = window.scrollY; // current scroll position
+	let progPercentage = document.querySelectorAll(
+		".skills__prog__bar__item__title span"
+	);
+	progPercentage.forEach((span) => {
+		span.textContent = "0%";
+	});
+	if (
+		windowScrollTop >
+		skillsOffsetTop + skillsOuterHeight / 2 - skillsInnerHeight
+	) {
+		progressSpans.forEach((span, i) => {
+			span.style.width = parseInt(span.getAttribute("progress")) + "%";
+			const counter = setInterval(() => {
+				let spanValue = parseInt(progPercentage[i].textContent);
+				let progressValue = parseInt(span.getAttribute("progress"));
+				if (spanValue < progressValue) {
+					spanValue++;
+					progPercentage[i].textContent = spanValue + "%";
+				} else {
+					clearInterval(counter);
+				}
+			}, 20);
+			console.log(span.getAttribute("progress"));
+		});
+	} else {
+		progressSpans.forEach((span) => {
+			span.style.width = 0;
+		});
+	}
+});
+// end proogress bars animation
+
+// ############################################################################
+
+// Gellery Lightbox
+const galleryImages = document.querySelectorAll(
+	".gallery .gallery__images .gallery__images__item img"
+);
+galleryImages.forEach((image) => {
+	image.addEventListener("click", () => {
+		// overlay
+		const pageOverlay = document.createElement("div");
+		pageOverlay.classList.add("overlay");
+		document.body.appendChild(pageOverlay);
+		// lightbox
+		const lightBox = document.createElement("div");
+		lightBox.classList.add("lightbox");
+		// image title
+		const imageTitle = document.createElement("h3");
+		if (image.alt !== null) {
+			imageTitle.textContent = image.alt;
+		}
+		imageTitle.style.alignSelf = "start";
+		lightBox.appendChild(imageTitle);
+		// close button
+		const closeButton = document.createElement("span");
+		closeButton.classList.add("close-btn");
+		closeButton.textContent = "X";
+		imageTitle.appendChild(closeButton);
+		lightBox.appendChild(imageTitle);
+		closeButton.addEventListener("click", () => {
+			lightBox.remove();
+			pageOverlay.remove();
+		});
+		// lightbox image
+		const lightBoxImage = document.createElement("img");
+		lightBoxImage.src = image.src;
+		lightBox.appendChild(lightBoxImage);
+		pageOverlay.appendChild(lightBox);
+	});
+});
+// end Gellery Lightbox
+
+// ############################################################################
+
+// start Timeline Section
+const timelineItems = document.querySelectorAll(
+	".timeline .timeline__content__item"
+);
+timelineItems.forEach((item, i) => {
+	if (i % 2 !== 0) {
+		item.style.alignSelf = "end";
+		item.style.marginLeft = "10px";
+	} else {
+		item.style.alignSelf = "start";
+		item.style.marginRight = "10px";
+	}
+});
+
+// end Timeline Section
+
+// ############################################################################
+
+// start navigation bullets
+const navBullets = document.querySelectorAll(".nav-bullets .nav-bullets__item");
+navBullets.forEach((bullet) => {
+	bullet.addEventListener("click", (e) => {
+		document.querySelector(e.target.dataset.section).scrollIntoView({
+			behavior: "smooth",
+		});
+	});
+});
+// end navigation bullets
