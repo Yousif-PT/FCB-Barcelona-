@@ -551,8 +551,13 @@ body {
 }
 .gallery .container .gallery__images {
 	display: grid;
-	grid-template-columns: repeat(auto-fit, minmax(124px, 1fr));
+	grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
 	gap: 12px;
+}
+@media (max-width: 767px) {
+	.gallery .container .gallery__images {
+		grid-template-columns: repeat(auto-fit, minmax(124px, 1fr));
+	}
 }
 .gallery .container .gallery__images img {
 	width: 100%;
