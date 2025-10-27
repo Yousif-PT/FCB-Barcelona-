@@ -137,8 +137,15 @@ const toggleMenu = document.querySelector(".landing-page .fa-bars");
 const navBar = document.querySelector(
 	".landing-page .landing-page__header__nav"
 );
+// toggle menu click event
 toggleMenu.addEventListener("click", () => {
 	navBar.classList.toggle("open");
+});
+// close menu when click outside
+document.addEventListener("click", (e) => {
+	if (e.target !== toggleMenu && e.target !== navBar) {
+		navBar.classList.remove("open");
+	}
 });
 // set curent page in nav bar
 LI.forEach((li) => {
