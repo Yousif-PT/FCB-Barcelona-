@@ -83,9 +83,28 @@ randomBackgrounds.addEventListener("click", () => {
 	randomBackgrounds.classList.toggle("fa-play");
 	changeBG();
 });
+// show and hide nav bullets
+const navBull = document.querySelector(".nav-bullets");
+const showBulletsOption = document.querySelector(".bullets-option .fa-eye");
+const HideBulletsOption = document.querySelector(
+	".bullets-option .fa-eye-slash"
+);
+showBulletsOption.addEventListener("click", () => {
+	navBull.style.opacity = 1;
+});
+HideBulletsOption.addEventListener("click", () => {
+	navBull.style.opacity = 0;
+});
+// reset button
+document.querySelector(".settings-container .fa-arrows-rotate").onclick =
+	() => {
+		localStorage.clear();
+		window.location.reload();
+	};
 // end settings box
 
 // ############################################################################
+
 // landing page main variables
 const logo = document.querySelector(
 	".landing-page .landing-page__header__logo"
@@ -113,7 +132,14 @@ for (let i = 0; i < trophies.length; i++) {
 	}
 	logo.appendChild(trophy);
 }
-
+// show and hide toggle menu
+const toggleMenu = document.querySelector(".landing-page .fa-bars");
+const navBar = document.querySelector(
+	".landing-page .landing-page__header__nav"
+);
+toggleMenu.addEventListener("click", () => {
+	navBar.classList.toggle("open");
+});
 // set curent page in nav bar
 LI.forEach((li) => {
 	li.addEventListener("click", () => {
@@ -147,41 +173,65 @@ function changeBG() {
 const progressSpans = document.querySelectorAll(
 	".skills .skills__prog .skills__prog__bar .skills__prog__bar__item .skills__prog__bar__item__progress span"
 );
-window.addEventListener("scroll", () => {
-	let skillsOffsetTop = document.querySelector(".skills").offsetTop; // distance from top of page to top of skills section
-	let skillsOuterHeight = document.querySelector(".skills").offsetHeight; // including padding and border
-	let skillsInnerHeight = this.innerHeight; // height of viewport
-	let windowScrollTop = window.scrollY; // current scroll position
-	let progPercentage = document.querySelectorAll(
+// put this at the end of <body> or run on DOMContentLoaded
+document.addEventListener("DOMContentLoaded", () => {
+	const skills = document.querySelector(".skills");
+	if (!skills) return console.warn("No .skills element found");
+
+	// find the bar elements that have a `progress` attribute
+	const progressSpans = skills.querySelectorAll("[progress]");
+	// the text elements that show the percent (your selector from before)
+	const progPercentage = skills.querySelectorAll(
 		".skills__prog__bar__item__title span"
 	);
-	progPercentage.forEach((span) => {
-		span.textContent = "0%";
+
+	// init
+	progressSpans.forEach((s, i) => {
+		s.style.width = "0%";
+		if (progPercentage[i]) progPercentage[i].textContent = "0%";
 	});
-	if (
-		windowScrollTop >
-		skillsOffsetTop + skillsOuterHeight / 2 - skillsInnerHeight
-	) {
-		progressSpans.forEach((span, i) => {
-			span.style.width = parseInt(span.getAttribute("progress")) + "%";
-			const counter = setInterval(() => {
-				let spanValue = parseInt(progPercentage[i].textContent);
-				let progressValue = parseInt(span.getAttribute("progress"));
-				if (spanValue < progressValue) {
-					spanValue++;
-					progPercentage[i].textContent = spanValue + "%";
-				} else {
-					clearInterval(counter);
+
+	let animated = false;
+
+	// IntersectionObserver is cleaner and more performant than 'scroll'
+	const io = new IntersectionObserver(
+		(entries, observer) => {
+			entries.forEach((entry) => {
+				if (entry.isIntersecting && !animated) {
+					animated = true;
+
+					progressSpans.forEach((span, i) => {
+						const target = parseInt(span.getAttribute("progress")) || 0;
+						// set the visual width immediately
+						span.style.width = target + "%";
+
+						// animate the number text from 0 -> target
+						if (!progPercentage[i]) return;
+						let current = 0;
+						// step size so bigger numbers don't take forever
+						const step = Math.max(1, Math.round(target / 20));
+						const timer = setInterval(() => {
+							current += step;
+							if (current >= target) {
+								progPercentage[i].textContent = target + "%";
+								clearInterval(timer);
+							} else {
+								progPercentage[i].textContent = current + "%";
+							}
+						}, 50);
+					});
+
+					// stop observing once animated (prevents re-trigger)
+					observer.unobserve(skills);
 				}
-			}, 20);
-			console.log(span.getAttribute("progress"));
-		});
-	} else {
-		progressSpans.forEach((span) => {
-			span.style.width = 0;
-		});
-	}
+			});
+		},
+		{ threshold: 0.6 }
+	);
+
+	io.observe(skills);
 });
+
 // end proogress bars animation
 
 // ############################################################################
@@ -246,6 +296,7 @@ timelineItems.forEach((item, i) => {
 // ############################################################################
 
 // start navigation bullets
+// scroll to section on bullet click
 const navBullets = document.querySelectorAll(".nav-bullets .nav-bullets__item");
 navBullets.forEach((bullet) => {
 	bullet.addEventListener("click", (e) => {
@@ -254,4 +305,29 @@ navBullets.forEach((bullet) => {
 		});
 	});
 });
+// set active class on bullets while scrolling
+navBullets.forEach((bullet) => {
+	const bullets = document.querySelectorAll(".nav-bullets__item");
+	const sections = [...bullets].map((b) =>
+		document.querySelector(b.getAttribute("data-section"))
+	);
+
+	const observer = new IntersectionObserver(
+		(entries) => {
+			entries.forEach((entry) => {
+				if (entry.isIntersecting) {
+					bullets.forEach((b) => b.classList.remove("active"));
+					const activeBullet = document.querySelector(
+						`.nav-bullets__item[data-section="#${entry.target.id}"]`
+					);
+					activeBullet.classList.add("active");
+				}
+			});
+		},
+		{ threshold: 0.6 }
+	);
+
+	sections.forEach((section) => observer.observe(section));
+});
+
 // end navigation bullets

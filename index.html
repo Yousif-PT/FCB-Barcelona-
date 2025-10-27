@@ -26,7 +26,7 @@
 				<i class="fa-solid fa-gear"></i>
 			</div>
 			<div class="settings-container">
-				<h4 style="padding: 8px 0; font-size: 21px">Colors</h4>
+				<h4>Colors</h4>
 				<ul class="colors-list">
 					<li data-color="#0576e7"></li>
 					<li data-color="#df364c"></li>
@@ -35,9 +35,28 @@
 				</ul>
 			</div>
 			<div class="settings-container">
-				<h4 style="padding: 8px 0; font-size: 20px">Random Bg</h4>
+				<h4>Random Bg</h4>
 				<div class="random-backgrounds">
 					<i class="fa-solid fa-pause" style="cursor: pointer"></i>
+				</div>
+			</div>
+			<div class="settings-container">
+				<h4>Navigate Bullets</h4>
+				<div class="bullets-option" style="text-align: center">
+					<i
+						class="fa-solid fa-eye"
+						style="cursor: pointer; margin-right: 30px; font-size: 23px"></i>
+					<i
+						class="fa-solid fa-eye-slash"
+						style="cursor: pointer; font-size: 23px"></i>
+				</div>
+			</div>
+			<div class="settings-container">
+				<h4>Reset Settings</h4>
+				<div class="reset" style="text-align: center">
+					<i
+						class="fa-solid fa-arrows-rotate"
+						style="cursor: pointer; font-size: 23px"></i>
 				</div>
 			</div>
 		</div>
@@ -60,13 +79,16 @@
 						<li><a href="#contact">Contact</a></li>
 					</ul>
 				</div>
+				<div class="toggle-menu">
+					<i class="fa-solid fa-bars" ></i>
+				</div>
 			</div>
 			<div class="landing-page__content">
 				<div class="landing-page__content__title">
 					<h1 style="text-transform: uppercase">
 						Barcelona Football Club
 						<br />
-						visca el<span> barca</span> & visca<span> catalunya</span>
+						visca el<span> Barca</span> & visca<span> Catalonia</span>
 					</h1>
 				</div>
 			</div>
@@ -81,10 +103,10 @@
 						<h2>About Barcelona FC</h2>
 						<h3 class="about__tagline">More than a Club, Home of Football.</h3>
 						<p>
-							UEFA Champions League (<span>5th</span> time) <br />
+							UEFA Champions (<span>5th</span> time) <br />
 							Copa del Rey (<span>32nd</span> time) <br />
 							La Liga (<span>28th</span> time)<br />
-							Supercopa de España (<span>15th</span> time)
+							Supercopa (<span>15th</span> time)
 						</p>
 					</div>
 					<div class="about__content__image">
@@ -96,11 +118,11 @@
 						<img src="/IMAGES/Spotify Camp Nou.jpeg" alt="logo" />
 					</div>
 					<div class="about__content__text">
-						<h2>🏟️ Spotify Camp Nou</h2>
+						<h2> Spotify Camp Nou</h2>
 						<p>
 							Location : Barcelona, Catalonia, Spain <br />
 							Open in : 1957 <br />
-							Capacity : (after renovation): ~105,000 <br />
+							Capacity : ~105,000 <br />
 							Owned by : FC Barcelona
 						</p>
 					</div>
@@ -333,6 +355,45 @@
 			</div>
 		</div>
 		<!-- end navigation bullets -->
+		<!-- Start contact section  -->
+		<div class="contact" id="contact">
+			<div class="container">
+				<div class="contact__title">
+					<h2>Contact Us</h2>
+				</div>
+				<div class="contact__data">
+					<form action="#" method="POST" class="contact__form">
+						<div>
+							<input
+								type="text"
+								name=".name"
+								placeholder="Your Name"
+								required />
+							<input
+								type="email"
+								name="email"
+								placeholder="Your Email"
+								required />
+							<input
+								type="text"
+								name="phone"
+								placeholder="Your Phone"
+								required />
+						</div>
+						<div>
+							<textarea
+								name="message"
+								cols="30"
+								rows="10"
+								placeholder="Your Message"
+								required></textarea>
+						</div>
+						<img src="./IMAGES/contact.jpg" alt="Catalonia">
+						<button type="submit" class="btn-submit">Send Message</button>
+					</form>
+				</div>
+			</div>
+		<!-- End contact section  -->
 		<!-- JS File -->
 		<script src="../JS/master.js"></script>
 	</body>
