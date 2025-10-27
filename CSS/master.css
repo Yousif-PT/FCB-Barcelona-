@@ -997,8 +997,9 @@ body {
 	padding: 10px 0;
 	background: linear-gradient(
 		to right,
-		var(--main-color) 50%,
-		var(--sec-color) 50%
+		var(--third-color),
+		var(--main-color),
+		var(--sec-color)
 	);
 	text-align: center;
 	position: relative;
@@ -1015,7 +1016,7 @@ body {
 }
 .footer p {
 	color: white;
-	font-size: 18px;
+	font-size: 14px;
 	font-weight: bold;
 	position: relative;
 	z-index: 2;
